@@ -48,6 +48,7 @@ namespace api.Controllers
                         var calaims = new List<Claim> {
                             new Claim("Username",get.Username),
                             new Claim("Email",get.Email),
+                            new Claim("Role",get.RoleId.ToString()),
                         };
 
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_Configuration["Jwt:Key"]));
