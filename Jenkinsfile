@@ -91,7 +91,7 @@ pipeline {
                 script {
                   
 
-                    sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} ' -d ${imageName}"
+                    sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME}  -d ${imageName}"
                 }
             }
         }
