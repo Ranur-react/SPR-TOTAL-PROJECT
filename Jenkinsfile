@@ -14,15 +14,6 @@ pipeline {
     }
     
     stages {
-        stage('Set MSSQL Password') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'MSSQL_SA_PASSWORD', variable: 'SA_PASWD')]) {
-                        env.PASSWD = SA_PASWD
-                    }
-                }
-            }
-        }
 
         stage('Clone or Pull') {
             steps {
