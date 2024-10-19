@@ -11,6 +11,8 @@ namespace api.Models
         [Required(ErrorMessage = "Username harus diisi")]
         [StringLength(50, ErrorMessage = "Username tidak boleh lebih dari 50 karakter")]
         public string Username { get; set; }
+        [StringLength(50, ErrorMessage = "Name tidak boleh lebih dari 50 karakter")]
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Password harus diisi")]
         [StringLength(100, ErrorMessage = "Password tidak boleh lebih dari 100 karakter")]

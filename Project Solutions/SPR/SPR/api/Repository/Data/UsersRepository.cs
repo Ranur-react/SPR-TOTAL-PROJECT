@@ -20,7 +20,7 @@ namespace api.Repository.Data
             {
                 var act = new User
                 {
-                    UserName = param.UserName,
+                    Username = param.Username,
                     Name=param.Name,
                     Email = param.Email,
                     Password = BCrypt.Net.BCrypt.HashPassword(param.Password),
@@ -39,10 +39,10 @@ namespace api.Repository.Data
 
         public int Login(LoginForm loginVM)
         {
-            var checkUsername = CheckDataAccount(loginVM.UserName);
+            var checkUsername = CheckDataAccount(loginVM.Username);
             if (checkUsername != null)
             {
-                var getPassword = myContext.Users.Where(e => e.UserName == checkUsername.UserName).FirstOrDefault();
+                var getPassword = myContext.Users.Where(e => e.Username == checkUsername.Username).FirstOrDefault();
                 bool checkPassword = BCrypt.Net.BCrypt.Verify(loginVM.Password, getPassword.Password);
                 //     bool checkPassword = loginVM.Password == getPassword.Password ;
                 if (checkPassword)
@@ -62,7 +62,7 @@ namespace api.Repository.Data
         }
         public User CheckDataAccount(String param)
         {
-            var respond = myContext.Users.Where(e => e.UserName == param).FirstOrDefault();
+            var respond = myContext.Users.Where(e => e.Username == param).FirstOrDefault();
             return respond;
 
         }

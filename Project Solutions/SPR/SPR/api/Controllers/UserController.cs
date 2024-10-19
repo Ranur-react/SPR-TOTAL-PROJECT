@@ -44,9 +44,9 @@ namespace api.Controllers
                     else
                     {
                         // return Ok("Login Berhasil");
-                        var get = usersRepository.CheckDataAccount(loginVM.UserName);
+                        var get = usersRepository.CheckDataAccount(loginVM.Username);
                         var calaims = new List<Claim> {
-                            new Claim("Username",get.UserName),
+                            new Claim("Username",get.Username),
                             new Claim("Email",get.Email),
                         };
 
