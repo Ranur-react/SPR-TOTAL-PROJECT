@@ -38,7 +38,7 @@ pipeline {
                             }
                         } else {
                             // Use GitHub token in the git clone command
-                            sh "git clone -b ${BRANCH} https://${GITHUB_TOKEN}${GITPATHREPO}"
+                            sh "git clone -b ${BRANCH} https://${GITHUB_TOKEN}@${GITPATHREPO}"
                         }
                     }
                 }
