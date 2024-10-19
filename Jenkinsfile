@@ -3,13 +3,17 @@ pipeline {
     environment {
         // Set environment variables for Docker Hub credentials
         DOCKERHUB_USER = 'ranur'
-        imageName = "ranur/fe-spr:8.0"
-        BRANCH = "frontend1.0"
-        NODE="net1"
-        PORT="4001"
-        PORT_PULISH="4001"
+        imageName = "ranur/mssql:22.0"
+        BRANCH = "db1.0"
+        NODE="sql1"
+        PORT="1433 "
+        PORT_PULISH="1433"
         ROOTDIR="SPR-TOTAL-PROJECT"
         REPO="https://github.com/Forber-Technology-Indonesia/frontend-toserba-pos.git"
+        HOSTNAME="sqldev"
+        withCredentials([string(credentialsId: 'MSSQL_SA_PASSWORD', variable: 'SA_PASWD')]) {
+            PASSWD=SA_PASWD
+        }
     }
     
     stages {
@@ -68,7 +72,8 @@ pipeline {
 
         stage('Run New Container') {
             steps {
-                sh "docker run -d --name ${NODE} -p ${PORT_PULISH}:${PORT} ${imageName}"
+                
+                sh "docker run -p ${PORT_PULISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=${PASSWD}' -d ${imageName}"
             }
         }
 
