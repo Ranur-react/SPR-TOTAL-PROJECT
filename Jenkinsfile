@@ -3,15 +3,14 @@ pipeline {
     environment {
         // Set environment variables for Docker Hub credentials
         DOCKERHUB_USER = 'ranur'
-        imageName = "ranur/mssql:22.0"
-        BRANCH = "db1.0"
-        NODE = "sql1"
-        PORT = "1433"
-        PORT_PUBLISH = "1433"
-        ROOTDIR = "SPR-TOTAL-PROJECT"
+        imageName = "ranur/fe-spr:8.0"
+        BRANCH = "frontend1.0"
+        NODE="net1"
+        PORT="4001"
+        PORT_PULISH="4001"
+        ROOTDIR="SPR-TOTAL-PROJECT"
+        SUBDIRECTORY = "1. Front Eend - ASPNETCore"
         GITPATHREPO = "github.com/Ranur-react/SPR-TOTAL-PROJECT.git" 
-        HOSTNAME = "sqldev"
-        SUBDIRECTORY = "7. DB"
     }
     
     stages {
@@ -49,8 +48,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "docker stop ${NODE}"
-                        sh "docker rm ${NODE}"
+                        sh 'docker stop ${NODE}'
+                        sh 'docker rm ${NODE}'
                     } catch (Exception e) {
                         echo "Container ${NODE} was not running or could not be stopped/removed: ${e}"
                     }
@@ -69,7 +68,6 @@ pipeline {
                 }
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -88,9 +86,7 @@ pipeline {
 
         stage('Run New Container') {
             steps {
-                script {
-                    sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=${PASSWD}' -d ${imageName}"
-                }
+                sh "docker run -d --name ${NODE} -p ${PORT_PULISH}:${PORT} ${imageName}"
             }
         }
 
