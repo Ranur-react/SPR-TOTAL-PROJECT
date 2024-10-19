@@ -10,7 +10,7 @@ pipeline {
         PORT_PUBLISH = "1433"
         ROOTDIR = "SPR-TOTAL-PROJECT"
         GITPATHREPO = "github.com/Ranur-react/SPR-TOTAL-PROJECT.git" 
-        HOSTNAME = "sqldev"
+        HOSTNAME = "sql1"
         SUBDIRECTORY = "7. DB"
     }
     
