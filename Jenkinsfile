@@ -30,28 +30,13 @@ pipeline {
                 }
             }
         }
-        stage('test SSH') {
-            steps {
-                script {
-                     // Gantilah 'sshPublisher' dengan nama konfigurasi SSH yang telah kamu buat di Jenkins
-                    sshPublisher(publishers: [
-                        sshPublisherDesc(
-                            configName: 'sshInstance',
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: '',
-                                    remoteDirectory: '',
-                                    execCommand: "touch ujicoba.py"
-                                )
-                            ],
-                            usePromotionTimestamp: false,
-                            useWorkspaceInPromotion: false,
-                            useWorkspaceInDownstream: false
-                        )
-                    ])
-                }
+     stage('Test SSH Connection') {
+        steps {
+            script {
+                sh "ssh -o StrictHostKeyChecking=no -i /home/jenkins/.ssh/id_rsa jenkins@tospos.my.id 'echo SSH Connection Successful'"
             }
         }
+     }
 
         // stage('Clone or Pull') {
         //     steps {
