@@ -30,7 +30,6 @@ pipeline {
                 }
             }
         }
-        stages {
         stage('test SSH') {
             steps {
                 script {
@@ -144,15 +143,15 @@ pipeline {
         // }
     }
 
-    post {
-        always {
-            echo 'This will always run'
-        }
-        success {
-            echo 'Pipeline was successful!'
-        }
-        failure {
-            echo 'Pipeline failed.'
-        }
-    }
+    // post {
+    //     always {
+    //         echo 'This will always run'
+    //     }
+    //     success {
+    //         echo 'Pipeline was successful!'
+    //     }
+    //     failure {
+    //         echo 'Pipeline failed.'
+    //     }
+    // }
 }
