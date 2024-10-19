@@ -33,7 +33,7 @@ pipeline {
      stage('Test SSH Connection') {
         steps {
             script {
-                sh "ssh -o StrictHostKeyChecking=no -i /home/jenkins/.ssh/id_rsa jenkins@tospos.my.id 'echo SSH Connection Successful'"
+                sh "ssh -o StrictHostKeyChecking=no -i ~/.ssh/google_compute_engine jenkins@tospos.my.id 'echo SSH Connection Successful'"
             }
         }
      }
