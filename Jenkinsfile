@@ -30,8 +30,8 @@ pipeline {
                 script {
                    // Fetch GitHub token from Jenkins credentials
                     withCredentials([string(credentialsId: 'GITOKEN', variable: 'GITHUB_TOKEN')]) {
-                        if (fileExists(DIR)) {
-                            dir(DIR) {
+                        if (fileExists(ROOTDIR)) {
+                            dir(ROOTDIR) {
                                 sh 'git fetch'
                                 sh "git checkout ${BRANCH}"
                                 sh "git pull origin ${BRANCH}"
