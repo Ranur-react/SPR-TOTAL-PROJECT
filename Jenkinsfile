@@ -89,7 +89,7 @@ pipeline {
         stage('Run New Container') {
             steps {
                 script {
-                    // sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=${PASSWD}' -d ${imageName}"
+                  
 
                     sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} ' -d ${imageName}"
                 }
