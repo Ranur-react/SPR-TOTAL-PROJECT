@@ -5,30 +5,37 @@ pipeline {
         DOCKERHUB_USER = 'ranur'
         imageName = "ranur/mssql:22.0"
         BRANCH = "db1.0"
-        NODE="sql1"
-        PORT="1433 "
-        PORT_PULISH="1433"
-        ROOTDIR="SPR-TOTAL-PROJECT"
-        REPO="https://github.com/Forber-Technology-Indonesia/frontend-toserba-pos.git"
-        HOSTNAME="sqldev"
-        withCredentials([string(credentialsId: 'MSSQL_SA_PASSWORD', variable: 'SA_PASWD')]) {
-            PASSWD=SA_PASWD
-        }
-        SUBDIRECTORY="7. DB"
+        NODE = "sql1"
+        PORT = "1433"
+        PORT_PUBLISH = "1433"
+        ROOTDIR = "SPR-TOTAL-PROJECT"
+        REPO = "https://github.com/Forber-Technology-Indonesia/frontend-toserba-pos.git"
+        HOSTNAME = "sqldev"
+        SUBDIRECTORY = "7. DB"
     }
     
     stages {
+        stage('Set MSSQL Password') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'MSSQL_SA_PASSWORD', variable: 'SA_PASWD')]) {
+                        env.PASSWD = SA_PASWD
+                    }
+                }
+            }
+        }
+
         stage('Clone or Pull') {
             steps {
                 script {
-                    if (fileExists(${ROOTDIR})) {
-                        dir(${ROOTDIR}) {
+                    if (fileExists(env.ROOTDIR)) {
+                        dir(env.ROOTDIR) {
                             sh 'git fetch'
-                            sh 'git checkout ${BRANCH}'
-                            sh 'git pull origin ${BRANCH}'
+                            sh "git checkout ${BRANCH}"
+                            sh "git pull origin ${BRANCH}"
                         }
                     } else {
-                        sh 'git clone -b ${BRANCH} ${REPO}'
+                        sh "git clone -b ${BRANCH} ${REPO}"
                     }
                 }
             }
@@ -38,8 +45,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'docker stop ${NODE}'
-                        sh 'docker rm ${NODE}'
+                        sh "docker stop ${NODE}"
+                        sh "docker rm ${NODE}"
                     } catch (Exception e) {
                         echo "Container ${NODE} was not running or could not be stopped/removed: ${e}"
                     }
@@ -58,26 +65,28 @@ pipeline {
                 }
             }
         }
+
         stage('Build Docker Image') {
             steps {
-                try {
-                    dir(${ROOTDIR}) 
-                        {
-                           dir(${SUBDIRECTORY}) 
-                                {
-                                    sh "docker build -t ${imageName} ."
-                                }
+                script {
+                    try {
+                        dir(env.ROOTDIR) {
+                            dir(env.SUBDIRECTORY) {
+                                sh "docker build -t ${imageName} ."
+                            }
                         }
                     } catch (Exception e) {
-                        echo "Docker ${imageName} was not build with reason: ${e}"
+                        echo "Docker image ${imageName} was not built due to: ${e}"
                     }
+                }
             }
         }
 
         stage('Run New Container') {
             steps {
-                
-                sh "docker run -p ${PORT_PULISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=${PASSWD}' -d ${imageName}"
+                script {
+                    sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=${PASSWD}' -d ${imageName}"
+                }
             }
         }
 
