@@ -14,6 +14,7 @@ pipeline {
         withCredentials([string(credentialsId: 'MSSQL_SA_PASSWORD', variable: 'SA_PASWD')]) {
             PASSWD=SA_PASWD
         }
+        SUBDIRECTORY="7. DB"
     }
     
     stages {
@@ -62,7 +63,10 @@ pipeline {
                 try {
                     dir(${ROOTDIR}) 
                         {
-                            sh "docker build -t ${imageName} ."
+                           dir(${SUBDIRECTORY}) 
+                                {
+                                    sh "docker build -t ${imageName} ."
+                                }
                         }
                     } catch (Exception e) {
                         echo "Docker ${imageName} was not build with reason: ${e}"
