@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/mssql/server:2022-latest
 
 # Menetapkan variabel environment untuk menerima EULA dan password SA
 ENV ACCEPT_EULA=Y
-ENV MSSQL_SA_PASSWORD=Padri0@@@@
 
 # Membuka port 1433
 EXPOSE 1433
