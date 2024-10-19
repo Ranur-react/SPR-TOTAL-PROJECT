@@ -9,7 +9,7 @@ pipeline {
         PORT = "1433"
         PORT_PUBLISH = "1433"
         ROOTDIR = "SPR-TOTAL-PROJECT"
-        REPO = "https://github.com/Forber-Technology-Indonesia/frontend-toserba-pos.git"
+        GITPATHREPO = "github.com/Ranur-react/SPR-TOTAL-PROJECT.git" 
         HOSTNAME = "sqldev"
         SUBDIRECTORY = "7. DB"
     }
@@ -28,14 +28,18 @@ pipeline {
         stage('Clone or Pull') {
             steps {
                 script {
-                    if (fileExists(env.ROOTDIR)) {
-                        dir(env.ROOTDIR) {
-                            sh 'git fetch'
-                            sh "git checkout ${BRANCH}"
-                            sh "git pull origin ${BRANCH}"
+                   // Fetch GitHub token from Jenkins credentials
+                    withCredentials([string(credentialsId: 'GITOKEN', variable: 'GITHUB_TOKEN')]) {
+                        if (fileExists(DIR)) {
+                            dir(DIR) {
+                                sh 'git fetch'
+                                sh "git checkout ${BRANCH}"
+                                sh "git pull origin ${BRANCH}"
+                            }
+                        } else {
+                            // Use GitHub token in the git clone command
+                            sh "git clone -b ${BRANCH} https://${GITHUB_TOKEN}${GITPATHREPO}"
                         }
-                    } else {
-                        sh "git clone -b ${BRANCH} ${REPO}"
                     }
                 }
             }
