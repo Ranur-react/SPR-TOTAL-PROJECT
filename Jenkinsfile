@@ -30,95 +30,118 @@ pipeline {
                 }
             }
         }
-
-        stage('Clone or Pull') {
+        stages {
+        stage('test SSH') {
             steps {
                 script {
-                   // Fetch GitHub token from Jenkins credentials
-                    withCredentials([string(credentialsId: 'GITOKEN', variable: 'GITHUB_TOKEN')]) {
-                        if (fileExists(ROOTDIR)) {
-                            dir(ROOTDIR) {
-                                sh 'git fetch'
-                                sh "git checkout ${BRANCH}"
-                                sh "git pull origin ${BRANCH}"
-                            }
-                        } else {
-                            // Use GitHub token in the git clone command
-                            sh "git clone -b ${BRANCH} https://${GITHUB_TOKEN}@${GITPATHREPO}"
-                        }
-                    }
+                     // Gantilah 'sshPublisher' dengan nama konfigurasi SSH yang telah kamu buat di Jenkins
+                    sshPublisher(publishers: [
+                        sshPublisherDesc(
+                            configName: 'sshInstance',
+                            transfers: [
+                                sshTransfer(
+                                    sourceFiles: '',
+                                    remoteDirectory: '',
+                                    execCommand: "touch ujicoba.py"
+                                )
+                            ],
+                            usePromotionTimestamp: false,
+                            useWorkspaceInPromotion: false,
+                            useWorkspaceInDownstream: false
+                        )
+                    ])
                 }
             }
         }
 
-        stage('Container Renewal') {
-            steps {
-                script {
-                    try {
-                        sh "docker stop ${NODE}"
-                        sh "docker rm ${NODE}"
-                    } catch (Exception e) {
-                        echo "Container ${NODE} was not running or could not be stopped/removed: ${e}"
-                    }
-                }
-            }
-        }
+        // stage('Clone or Pull') {
+        //     steps {
+        //         script {
+        //            // Fetch GitHub token from Jenkins credentials
+        //             withCredentials([string(credentialsId: 'GITOKEN', variable: 'GITHUB_TOKEN')]) {
+        //                 if (fileExists(ROOTDIR)) {
+        //                     dir(ROOTDIR) {
+        //                         sh 'git fetch'
+        //                         sh "git checkout ${BRANCH}"
+        //                         sh "git pull origin ${BRANCH}"
+        //                     }
+        //                 } else {
+        //                     // Use GitHub token in the git clone command
+        //                     sh "git clone -b ${BRANCH} https://${GITHUB_TOKEN}@${GITPATHREPO}"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Image Remove') {
-            steps {
-                script {
-                    try {
-                        sh "docker rmi ${imageName}"
-                    } catch (Exception e) {
-                        echo "Image ${imageName} could not be removed: ${e}"
-                    }
-                }
-            }
-        }
+        // stage('Container Renewal') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 sh "docker stop ${NODE}"
+        //                 sh "docker rm ${NODE}"
+        //             } catch (Exception e) {
+        //                 echo "Container ${NODE} was not running or could not be stopped/removed: ${e}"
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    try {
-                        dir(env.ROOTDIR) {
-                            dir(env.SUBDIRECTORY) {
-                                sh "docker build -t ${imageName} ."
-                            }
-                        }
-                    } catch (Exception e) {
-                        echo "Docker image ${imageName} was not built due to: ${e}"
-                    }
-                }
-            }
-        }
+        // stage('Image Remove') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 sh "docker rmi ${imageName}"
+        //             } catch (Exception e) {
+        //                 echo "Image ${imageName} could not be removed: ${e}"
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Run New Container') {
-            steps {
-                script {
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 dir(env.ROOTDIR) {
+        //                     dir(env.SUBDIRECTORY) {
+        //                         sh "docker build -t ${imageName} ."
+        //                     }
+        //                 }
+        //             } catch (Exception e) {
+        //                 echo "Docker image ${imageName} was not built due to: ${e}"
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Run New Container') {
+        //     steps {
+        //         script {
                   
 
-                    sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -d ${imageName} "
-                }
-            }
-        }
+        //             sh "docker run -p ${PORT_PUBLISH}:${PORT} --name ${NODE} --hostname ${HOSTNAME} -d ${imageName} "
+        //         }
+        //     }
+        // }
 
-        stage('Login to Docker Hub') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'DOCKERHUB_TOKEN', variable: 'DOC_PWD')]) {
-                        sh "echo ${DOC_PWD} | docker login -u ${DOCKERHUB_USER} --password-stdin"
-                    }
-                }
-            }
-        }
+        // stage('Login to Docker Hub') {
+        //     steps {
+        //         script {
+        //             withCredentials([string(credentialsId: 'DOCKERHUB_TOKEN', variable: 'DOC_PWD')]) {
+        //                 sh "echo ${DOC_PWD} | docker login -u ${DOCKERHUB_USER} --password-stdin"
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    sh "docker push ${imageName}"
-                }
-            }
-        }
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             sh "docker push ${imageName}"
+        //         }
+        //     }
+        // }
     }
 
     post {
