@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.Models
@@ -7,12 +8,13 @@ namespace api.Models
     {
         [Key]
         public Guid Id { get; set; }= Guid.NewGuid();
-
+        [ForeignKey("SPR")]
         [Required(ErrorMessage = "SPR ID harus diisi")]
         [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
         public string SPRId { get; set; }
+        [JsonIgnore]
         public virtual SPR SPR { get; set; }  // Navigasi ke SPR
-
+        [ForeignKey("Material")]
         [Required(ErrorMessage = "Material ID harus diisi")]
         public Guid MaterialId { get; set; }
         public virtual Material Material { get; set; }  // Navigasi ke Material

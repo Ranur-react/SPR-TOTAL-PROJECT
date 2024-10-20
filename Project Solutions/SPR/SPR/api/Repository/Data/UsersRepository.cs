@@ -23,6 +23,7 @@ namespace api.Repository.Data
                     Username = param.Username,
                     Name=param.Name,
                     Email = param.Email,
+                    RoleId= param.Role,
                     Password = BCrypt.Net.BCrypt.HashPassword(param.Password),
                 };
                 myContext.Users.Add(act);

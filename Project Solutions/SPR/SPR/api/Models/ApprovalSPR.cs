@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.Models
 {
@@ -6,14 +8,15 @@ namespace api.Models
     {
         [Key]
         public Guid Id { get; set; }= Guid.NewGuid();
-
         [Required(ErrorMessage = "SPR ID harus diisi")]
         [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
+        [ForeignKey("SPR")]
         public string SPRId { get; set; }
+        [JsonIgnore]
         public virtual SPR SPR { get; set; }  // Navigasi ke SPR
-
         [Required(ErrorMessage = "User Approver ID harus diisi")]
         public Guid UserApproverId { get; set; }
+        [JsonIgnore]
         public virtual User UserApprover { get; set; }  // Navigasi ke User Approver
 
         [Required(ErrorMessage = "Tanggal approval harus diisi")]

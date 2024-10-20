@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Context;
 
@@ -11,9 +12,10 @@ using api.Context;
 namespace api.Migrations
 {
     [DbContext(typeof(Db_context))]
-    partial class Db_contextModelSnapshot : ModelSnapshot
+    [Migration("20241020133443_model relations without infinity4")]
+    partial class modelrelationswithoutinfinity4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,11 +49,16 @@ namespace api.Migrations
                     b.Property<Guid>("UserApproverId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SPRId");
 
                     b.HasIndex("UserApproverId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("approvalSPRs");
                 });
@@ -285,6 +292,10 @@ namespace api.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("api.Models.User", null)
+                        .WithMany("ApprovalSPRs")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("SPR");
 
                     b.Navigation("UserApprover");
@@ -363,6 +374,8 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.User", b =>
                 {
+                    b.Navigation("ApprovalSPRs");
+
                     b.Navigation("SPRs");
                 });
 #pragma warning restore 612, 618

@@ -19,6 +19,7 @@ namespace api.Models
 
         [Required(ErrorMessage = "Tanggal selesai proyek harus diisi")]
         public DateTime TanggalSelesai { get; set; }
+        public virtual ICollection<SPR> SPRs { get; set; }
 
     }
 }

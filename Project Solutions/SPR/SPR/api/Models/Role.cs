@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace api.Models
 {
@@ -9,5 +10,8 @@ namespace api.Models
         [Required(ErrorMessage = "RoleName harus disi")]
         public string RoleName { get; set; }
         public string Description { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<User> Users { get; set; }
+
     }
 }

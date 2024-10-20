@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace api.Models
 {
@@ -25,14 +26,17 @@ namespace api.Models
         [Required(ErrorMessage = "Tujuan SPR harus diisi")]
         [StringLength(200, ErrorMessage = "Tujuan SPR tidak boleh lebih dari 200 karakter")]
         public string TujuanSPR { get; set; }
-
+        [ForeignKey("Proyek")]
         [Required(ErrorMessage = "Proyek ID harus diisi")]
-        public int ProyekId { get; set; }  
+        public int ProyekId { get; set; }
+        [JsonIgnore]
         public  virtual Proyek Proyek { get; set; }  // Navigasi ke Proyek
-
+        [ForeignKey("UserPeminta")]
         [Required(ErrorMessage = "User Peminta ID harus diisi")]
         public Guid UserPemintaId { get; set; }  // Id User tetap menggunakan tipe int
         public virtual User UserPeminta { get; set; }  // Navigasi ke User Peminta
+        public virtual ICollection<ApprovalSPR> ApprovalSPRs { get; set; }
+        public virtual ICollection<DetilSPR> DetilSPRs { get; set; }
 
     }
 }
