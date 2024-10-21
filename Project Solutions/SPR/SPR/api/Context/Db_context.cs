@@ -11,6 +11,7 @@ namespace api.Context
     {
         public Db_context(DbContextOptions<Db_context> options) : base(options)
         {
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,6 +25,7 @@ namespace api.Context
             .HasForeignKey(a => a.UserApproverId)
             .OnDelete(DeleteBehavior.NoAction);
         }
+     
         public DbSet<User> Users { get; set; }
         public DbSet<Proyek> Proyeks { get; set;}
         public DbSet<Material>Materials { get; set; }
@@ -32,5 +34,6 @@ namespace api.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<ApprovalSPR> approvalSPRs { get; set; }
         public DbSet<LogSPR> logSPRs { get; set; }
+       
     }
 }

@@ -1,6 +1,7 @@
 ﻿using api.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace api.Base
 {
@@ -67,8 +68,11 @@ namespace api.Base
         [HttpPost]
         public ActionResult<Entity> Post(Entity entity)
         {
+            Console.WriteLine($"Received entity: {JsonSerializer.Serialize(entity)}");
+
             try
             {
+                Console.WriteLine("Entity Received: " + entity);
                 var result = repository.Insert(entity);
                 switch (result)
                 {
@@ -130,6 +134,5 @@ namespace api.Base
             }
 
         }
-
     }
 }

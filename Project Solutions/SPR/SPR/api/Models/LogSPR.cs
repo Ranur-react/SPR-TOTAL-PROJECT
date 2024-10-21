@@ -8,7 +8,7 @@ namespace api.Models
         public Guid Id { get; set; }= Guid.NewGuid();
 
         [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
-        public string SPRId { get; set; }
+        public string? SPRId { get; set; }
 
         public Guid UserApproverId { get; set; }
 

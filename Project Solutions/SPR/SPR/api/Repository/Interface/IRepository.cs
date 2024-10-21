@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace api.Repository.Interface
-    
+﻿namespace api.Repository.Interface
 {
     public interface IRepository<Entity, Key> where Entity : class
     {
@@ -10,5 +7,6 @@ namespace api.Repository.Interface
         int Insert(Entity entity);
         int Update(Entity entity);
         int Delete(Key key);
+
     }
 }

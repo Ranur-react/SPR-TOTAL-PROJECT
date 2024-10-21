@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 namespace api.Repository
 {
     public class GeneralRepository<Context, Entity, Key> : IRepository<Entity, Key>
-           where Entity : class
-        where Context : Db_context
+          where Entity : class
+       where Context : Db_context
     {
         private readonly Db_context myContext;
         private readonly DbSet<Entity> entities;

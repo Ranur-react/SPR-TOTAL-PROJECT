@@ -3,13 +3,13 @@ pipeline {
     environment {
         // Set environment variables for Docker Hub credentials
         DOCKERHUB_USER = 'ranur'
-        imageName = "ranur/api1-spr:8.0"
-        BRANCH = "api1.0"
-        NODE="net3"
-        PORT="4003"
-        PORT_PULISH="4003"
+        imageName = "ranur/fe-spr:8.0"
+        BRANCH = "frontend1.0"
+        NODE="net1"
+        PORT="4001"
+        PORT_PULISH="4001"
         ROOTDIR="SPR-TOTAL-PROJECT"
-        SUBDIRECTORY = "3. API1-SPR Service"
+        SUBDIRECTORY = "1. Front Eend - ASPNETCore"
         GITPATHREPO = "github.com/Ranur-react/SPR-TOTAL-PROJECT.git" 
     }
     

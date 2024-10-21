@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 {
-    options.SuppressModelStateInvalidFilter = true;
+    options.SuppressModelStateInvalidFilter = false;//ini ngefek ke entity validations , kalau ini true data yang salah mengakibatkan value semua nya jadi null
 }).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
@@ -24,6 +24,15 @@ services.AddDbContext<Db_context>(options => {
 });
 
 services.AddScoped<UsersRepository>();
+services.AddScoped<SPRRepository>();
+services.AddScoped<ProyekRepository>();
+services.AddScoped<MaterialRepository>();
+services.AddScoped<DetilSPRRepository>();
+services.AddScoped<ApprovalSPRRepository>();
+services.AddScoped<LogSPRRepository>();
+services.AddScoped<RoleRepository>();
+services.AddScoped<RoleRepository>();
+
 services.AddAuthentication(auth =>
 {
     auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

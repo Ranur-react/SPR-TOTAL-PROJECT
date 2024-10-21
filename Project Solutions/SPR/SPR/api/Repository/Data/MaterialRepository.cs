@@ -3,11 +3,11 @@ using api.Models;
 
 namespace api.Repository.Data
 {
-    public class UsersRepository : GeneralRepository<Db_context, User, Guid>
+    public class MaterialRepository : GeneralRepository<Db_context, Material, Guid>
     {
         private readonly Db_context myContext;
 
-        public UsersRepository(Db_context myContext) : base(myContext)
+        public MaterialRepository(Db_context myContext) : base(myContext) 
         {
             this.myContext = myContext;
         }
