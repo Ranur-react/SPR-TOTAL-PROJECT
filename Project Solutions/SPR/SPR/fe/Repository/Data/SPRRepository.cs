@@ -1,6 +1,5 @@
 ﻿using api.Context;
 using api.Models;
-using api.Models.ViewModel;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +9,7 @@ namespace api.Repository.Data
     {
         private readonly Db_context myContext;
 
-        public SPRRepository(Db_context myContext) : base(myContext)
+        public SPRRepository(Db_context myContext): base(myContext)
         {
             this.myContext = myContext;
         }
@@ -54,8 +53,7 @@ namespace api.Repository.Data
 
         //    //return (int)outputSPRNo.Value;
         //}
-        public int CreateSPR(SPR content)
-        {
+        public int CreateSPR(SPR content) {
             try
             {
                 //jika tanggal kosong
@@ -77,57 +75,7 @@ namespace api.Repository.Data
                 return 0;
             }
         }
-
-
-
-
-        public int CreateSPRWithDetails(SPRContentDetilView content)
-        {
-            try
-            {
-                if (content.TanggalMinta == default(DateTime))
-                {
-                    content.TanggalMinta = DateTime.UtcNow;
-                }
-                //Ambil Nomor Urut Project dalam bulan ini yang sudah masuk SPR
-                var newSPRNo = GenerateSPRNoAsync(content.ProyekId, content.TanggalMinta).Result;
-                //Build SPR Formating
-                content.Id = $"{newSPRNo}-{content.ProyekId}-{content.TanggalMinta.Month}-{content.TanggalMinta.Year}";
-
-                SPR newData = new SPR
-                {
-                    Id = content.Id,
-                    ZonaSPR = content.ZonaSPR,
-                    UserPemintaId = content.UserPemintaId,
-                    TujuanSPR = content.TujuanSPR,
-                    TanggalMinta = content.TanggalMinta,
-                    StatusSPR = content.StatusSPR,
-                    ProyekId = content.ProyekId,
-
-                };
-                myContext.Headers_SP.Add(newData);
-                myContext.SaveChanges();
-
-                //---lanjutkan tambah data ke Detils dibawah berikut
-
-
-                return 1;
-            }
-            catch (Exception e)
-            {
-
-                return 0;
-            }
-
-        }
-
-
-
-
-
-
-
-        public async Task<string> GenerateSPRNoAsync(int proyekId, DateTime tanggalMinta)
+        public async Task<string> GenerateSPRNoAsync(int proyekId,DateTime tanggalMinta)
         {
             var bulan = tanggalMinta.Month;
             var tahun = tanggalMinta.Year;

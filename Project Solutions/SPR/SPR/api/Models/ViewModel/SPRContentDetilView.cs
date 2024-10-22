@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using api.BaseModels;
 
-namespace api.Models
+namespace api.Models.ViewModel
 {
-    public class SPR : BaseEntity
-
+    public class SPRContentDetilView
     {
-        [Key]
-        [Required]
+
+
+
+        //---------------------SPR Attribute
         [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
-        public String Id { get; set; }  // Menggunakan UUID otomatis
+        public String? Id { get; set; }  // Menggunakan UUID otomatis
 
         [Required(ErrorMessage = "Tanggal permintaan harus diisi")]
         public DateTime TanggalMinta { get; set; }
@@ -33,11 +32,21 @@ namespace api.Models
         [ForeignKey("UserPeminta")]
         [Required(ErrorMessage = "User Peminta ID harus diisi")]
         public Guid UserPemintaId { get; set; }  // Id User tetap menggunakan tipe int
-        public virtual User? UserPeminta { get; set; }  // Navigasi ke User Peminta
-        [JsonIgnore]
-        public virtual Proyek? Proyek { get; set; }  // Navigasi ke Proyek
-        public virtual ICollection<ApprovalSPR>? ApprovalSPRs { get; set; }
-        public virtual ICollection<DetilSPR>? DetilSPRs { get; set; }
+        //------------------Detil Attribute
+        [Required(ErrorMessage = "SPR ID harus diisi")]
+        [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
+        public string? SPRId { get; set; }
+        [Required(ErrorMessage = "Material ID harus diisi")]
+        public Guid MaterialId { get; set; }
+
+        [Required(ErrorMessage = "Volume material harus diisi")]
+        [Range(1, int.MaxValue, ErrorMessage = "Volume material harus lebih dari 0")]
+        public int Volume { get; set; }
+        [Required(ErrorMessage = "Unit harus diisi")]
+        [StringLength(10, ErrorMessage = "Unit tidak boleh lebih dari 10 karakter")]
+        public string? Unit { get; set; }
+        public DateTime TanggalRencanaTerima { get; set; }
+        public bool StatusDisetujui { get; set; }  // 0 = Belum Disetujui, 1 = Disetujui
 
     }
 }
