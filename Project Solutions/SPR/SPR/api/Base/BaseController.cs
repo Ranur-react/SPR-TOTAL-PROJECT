@@ -66,7 +66,7 @@ namespace api.Base
             }
         }
         [HttpPost]
-        public ActionResult<Entity> Post(Entity entity)
+        public virtual ActionResult<Entity> Post(Entity entity)
         {
             Console.WriteLine($"Received entity: {JsonSerializer.Serialize(entity)}");
 

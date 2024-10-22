@@ -19,26 +19,29 @@ namespace api.Controllers
             this.sPRRepository = sPRRepository;
             _Configuration = configuration;
         }
-        //public string GenerateSPRid() {
-        //    //var bulan = tanggalMinta.Month;
-        //    //var tahun = tanggalMinta.Year;
-        //    //var parameterProyekId = new SqlParameter("@ProyekId", proyekId);
-        //    //var parameterBulan = new SqlParameter("@Bulan", bulan);
-        //    //var parameterTahun = new SqlParameter("@Tahun", tahun);
-        //    //var outputSPRNo = new SqlParameter
-        //    //{
-        //    //    ParameterName = "@NewSPRNo",
-        //    //    SqlDbType = System.Data.SqlDbType.Int,
-        //    //    Direction = System.Data.ParameterDirection.Output
-        //    //};
-
-        //    //await _context.Database.ExecuteSqlRawAsync("EXEC GenerateSPRNo @ProyekId, @Bulan, @Tahun, @NewSPRNo OUTPUT",
-        //    //    parameterProyekId, parameterBulan, parameterTahun, outputSPRNo);
-
-        //    //return (int)outputSPRNo.Value;
-        //    //return "";
-
-        //    //Saay ingin SPRId di generate dari Store Prosedure semua, nanti tinggal tinggal generate saja
-        //}
+        [HttpPost]
+        public override ActionResult<SPR> Post(SPR entity)
+        {
+            try
+            {
+                var result = sPRRepository.CreateSPR(entity);
+                switch (result)
+                {
+                    case 1:
+                        return Ok(new { status = StatusCodes.Status201Created, result, message = $"Data Berhasil Tersimpan ke [{ControllerContext.ActionDescriptor.ControllerName}]" });
+                    //return Ok(result);
+                    case 2:
+                        return Ok(new { status = StatusCodes.Status201Created, result, message = $"Data Berhasil Tersimpan ke [{ControllerContext.ActionDescriptor.ControllerName}] dan kedalam Table" });
+                    case 3:
+                        return Ok(new { status = StatusCodes.Status200OK, result, message = $"Data sudah ada [{ControllerContext.ActionDescriptor.ControllerName}]" });
+                    default:
+                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = $" Data gagal Ditambahkan , ada kekeliruan dalam data yang dikirimkan, hubungi adminstrator [{ControllerContext.ActionDescriptor.ControllerName}]" });
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { status = StatusCodes.Status417ExpectationFailed, errors = e.Message });
+            }
+        }
     }
 }

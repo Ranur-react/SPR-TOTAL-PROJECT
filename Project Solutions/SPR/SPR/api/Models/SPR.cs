@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using api.BaseModels;
 
 namespace api.Models
 {
-    public class SPR
-    
+    public class SPR : BaseEntity
+
     {
         [Key]
-        [Required(ErrorMessage = "Kode SPR harus diisi")]
         [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
-        public String Id { get; set; }  // Menggunakan UUID otomatis
+        public String? Id { get; set; }  // Menggunakan UUID otomatis
 
         [Required(ErrorMessage = "Tanggal permintaan harus diisi")]
         public DateTime TanggalMinta { get; set; }
@@ -30,13 +30,14 @@ namespace api.Models
         [Required(ErrorMessage = "Proyek ID harus diisi")]
         public int ProyekId { get; set; }
         [JsonIgnore]
-        public  virtual Proyek Proyek { get; set; }  // Navigasi ke Proyek
         [ForeignKey("UserPeminta")]
         [Required(ErrorMessage = "User Peminta ID harus diisi")]
         public Guid UserPemintaId { get; set; }  // Id User tetap menggunakan tipe int
-        public virtual User UserPeminta { get; set; }  // Navigasi ke User Peminta
-        public virtual ICollection<ApprovalSPR> ApprovalSPRs { get; set; }
-        public virtual ICollection<DetilSPR> DetilSPRs { get; set; }
+        public virtual User? UserPeminta { get; set; }  // Navigasi ke User Peminta
+        public virtual Proyek? Proyek { get; set; }  // Navigasi ke Proyek
+
+        public virtual ICollection<ApprovalSPR>? ApprovalSPRs { get; set; }
+        public virtual ICollection<DetilSPR>? DetilSPRs { get; set; }
 
     }
 }

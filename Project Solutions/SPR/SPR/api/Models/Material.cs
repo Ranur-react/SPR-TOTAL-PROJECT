@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using api.BaseModels;
 
 namespace api.Models
 {
-    public class Material
+    public class Material : BaseEntity
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();

@@ -2,10 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using api.BaseModels;
 
 namespace api.Models
 {
-    public class User
+    public class User : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }=Guid.NewGuid();
@@ -27,13 +28,13 @@ namespace api.Models
         [ForeignKey("Role")]
         [Required(ErrorMessage = "Role ID harus diisi")]
         public int RoleId { get; set; }
-        public virtual Role Role { get; set; }  // Navigasi ke Role
+        public virtual Role? Role { get; set; }  // Navigasi ke Role
 
         //[JsonIgnore]
         //public virtual ICollection<ApprovalSPR>ApprovalSPRs { get; set; }
         //Saat migrasi ini dimatikan agar menghindari konfigurasi relasi ganda dengan  Eentity Framework
         
         [JsonIgnore]
-        public virtual ICollection<SPR> SPRs { get; set; }
+        public virtual ICollection<SPR>? SPRs { get; set; }
     }
 }

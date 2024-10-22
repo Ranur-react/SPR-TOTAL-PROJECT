@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using api.BaseModels;
 
 namespace api.Models
 {
-    public class LogSPR
+    public class LogSPR : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }= Guid.NewGuid();

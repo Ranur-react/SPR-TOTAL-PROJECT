@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using api.BaseModels;
+
 
 namespace api.Models
 {
-    public class DetilSPR
+    public class DetilSPR : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }= Guid.NewGuid();

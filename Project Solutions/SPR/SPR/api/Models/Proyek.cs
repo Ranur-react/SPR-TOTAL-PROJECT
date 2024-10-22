@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using api.BaseModels;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace api.Models
 {
-    public class Proyek
+    public class Proyek : BaseEntity
     {
         [Key]
         public int Id { get; set; } //Sengaja nggak pakai UUID karena akan mengikuti requirement soal

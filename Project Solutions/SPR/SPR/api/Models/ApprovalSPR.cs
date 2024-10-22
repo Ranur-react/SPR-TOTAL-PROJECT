@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using api.BaseModels;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.Models
 {
-    public class ApprovalSPR
+    public class ApprovalSPR : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }= Guid.NewGuid();
