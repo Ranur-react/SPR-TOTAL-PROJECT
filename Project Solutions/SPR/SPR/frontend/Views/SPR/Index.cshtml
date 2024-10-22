@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@section HeaderTag{
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+}
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Kode SPR</th>
+            <th>Zona</th>
+            <th>Tanggal SPR</th>
+            <th>Tujuan SPR</th>
+            <th>Nama Peminta</th>
+            <th>Nama Penyetuju 1</th>
+            <th>Nama Penyetuju 2</th>
+            <th>Ada Detil</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+@section Scripts{
+
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script>
+        console.log("Helllow World");
+        $(document).ready(function () {
+
+            var data = [
+                [
+                    "Tiger Nixon",
+                    "System Architect",
+                    "Edinburgh",
+                    "5421",
+                    "2011/04/25",
+                    "$3,120"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ],
+                [
+                    "Garrett Winters",
+                    "Director",
+                    "Edinburgh",
+                    "8422",
+                    "2011/07/25",
+                    "$5,300"
+                ]
+            ]
+
+            console.log("Data Table begin");
+            $('#myTable').DataTable({
+                data:data
+            });
+        });
+    </script>
+
+}

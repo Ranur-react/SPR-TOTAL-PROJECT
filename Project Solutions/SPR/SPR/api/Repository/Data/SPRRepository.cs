@@ -15,45 +15,6 @@ namespace api.Repository.Data
             this.myContext = myContext;
         }
 
-        //public SPR CreateSPR(SPR content)
-        //{
-        //    try
-        //    {
-        //        content.TanggalMinta= content.TanggalMinta=="jika tidak di isi user"?IsiOtomatisDariTanggalHariIni: content.TanggalMinta
-        //        var nilaistoreProcedureDidapatkan= GenerateSPRNoAsync(content.ProyekId,content.TanggalMinta)
-        //        int SPRonThisMonth = '0001' + content.ProyekId + '';
-        //        var SPR
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-        //public async Task<int> GenerateSPRNoAsync(int proyekId, DateTime tanggalMinta)
-        //{
-        //    var bulan = tanggalMinta.Month;
-        //    var tahun = tanggalMinta.Year;
-
-
-        //    { 
-        //    saya mau mengambilk nilai store procedure dari sini
-        //    }
-        //    //var parameterProyekId = new SqlParameter("@ProyekId", proyekId);
-        //    //var parameterBulan = new SqlParameter("@Bulan", bulan);
-        //    //var parameterTahun = new SqlParameter("@Tahun", tahun);
-        //    //var outputSPRNo = new SqlParameter
-        //    //{
-        //    //    ParameterName = "@NewSPRNo",
-        //    //    SqlDbType = System.Data.SqlDbType.Int,
-        //    //    Direction = System.Data.ParameterDirection.Output
-        //    //};
-
-        //    //await myContext.Database.ExecuteSqlRawAsync("EXEC GenerateSPRNo @ProyekId, @Bulan, @Tahun, @NewSPRNo OUTPUT",
-        //    //    parameterProyekId, parameterBulan, parameterTahun, outputSPRNo);
-
-        //    //return (int)outputSPRNo.Value;
-        //}
         public int CreateSPR(SPR content)
         {
             try
@@ -89,6 +50,13 @@ namespace api.Repository.Data
                 {
                     content.TanggalMinta = DateTime.UtcNow;
                 }
+                if (content.TanggalRencanaTerima == default(DateTime))
+                {
+                    //sya ingin Tanggal Rencana terima = 14 hari setelah tanggal Minta
+                    content.TanggalRencanaTerima = content.TanggalMinta.AddDays(14);
+                }
+
+
                 //Ambil Nomor Urut Project dalam bulan ini yang sudah masuk SPR
                 var newSPRNo = GenerateSPRNoAsync(content.ProyekId, content.TanggalMinta).Result;
                 //Build SPR Formating
@@ -108,9 +76,19 @@ namespace api.Repository.Data
                 myContext.Headers_SP.Add(newData);
                 myContext.SaveChanges();
 
-                //---lanjutkan tambah data ke Detils dibawah berikut
-
-
+                //--- insert data ke Detils dibawah berikut
+                DetilSPR newDataDetil = new DetilSPR
+                {
+                    MaterialId = content.MaterialId,
+                    SPRId = content.Id,
+                    StatusDisetujui = content?.StatusDisetujui ?? false,
+                    Unit=content?.Unit,
+                    Volume=content.Volume,
+                    TanggalRencanaTerima=content.TanggalRencanaTerima,
+      
+                };
+                myContext.Detils_SPR.Add(newDataDetil);
+                myContext.SaveChanges();
                 return 1;
             }
             catch (Exception e)

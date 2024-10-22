@@ -33,9 +33,6 @@ namespace api.Models.ViewModel
         [Required(ErrorMessage = "User Peminta ID harus diisi")]
         public Guid UserPemintaId { get; set; }  // Id User tetap menggunakan tipe int
         //------------------Detil Attribute
-        [Required(ErrorMessage = "SPR ID harus diisi")]
-        [StringLength(20, ErrorMessage = "Kode SPR tidak boleh lebih dari 20 karakter")]
-        public string? SPRId { get; set; }
         [Required(ErrorMessage = "Material ID harus diisi")]
         public Guid MaterialId { get; set; }
 

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "api\api.csproj", "{E015E2BD-9177-437E-9649-FD17839FC447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "api\api.csproj", "{E015E2BD-9177-437E-9649-FD17839FC447}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fe", "fe\fe.csproj", "{6F1352BD-7E27-4BD2-9F8C-433568AB0CAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fe", "fe\fe.csproj", "{6F1352BD-7E27-4BD2-9F8C-433568AB0CAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frontend", "frontend\frontend.csproj", "{75B37E5B-2344-465A-893F-224534DCAD4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6F1352BD-7E27-4BD2-9F8C-433568AB0CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1352BD-7E27-4BD2-9F8C-433568AB0CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F1352BD-7E27-4BD2-9F8C-433568AB0CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75B37E5B-2344-465A-893F-224534DCAD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B37E5B-2344-465A-893F-224534DCAD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B37E5B-2344-465A-893F-224534DCAD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B37E5B-2344-465A-893F-224534DCAD4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
