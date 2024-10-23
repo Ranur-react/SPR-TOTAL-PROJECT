@@ -1,9 +1,14 @@
-﻿namespace frontend.Base
+﻿using Microsoft.Extensions.Options;
+
+namespace frontend.Base
 {
     public class Address
     {
-        public string API = "https://localhost:7011/API/";
-        public string API_Prod = "https://api1.tospos.my.id/API/";
+        public string APILink = "https://localhost:7011/API/";
 
+        public Address(IOptions<AppSettings> options)
+        {
+            APILink = options.Value.ApiBaseUrl;
+        }
     }
 }

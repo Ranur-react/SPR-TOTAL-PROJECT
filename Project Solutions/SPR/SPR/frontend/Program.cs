@@ -1,4 +1,10 @@
+using frontend.Base;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Bind konfigurasi dari appsettings.json
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

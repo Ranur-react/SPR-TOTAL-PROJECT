@@ -44,126 +44,39 @@
     <script>
         console.log("Helllow World");
         $(document).ready(function () {
-
-            var data = [
-                [
-                    "Tiger Nixon",
-                    "System Architect",
-                    "Edinburgh",
-                    "5421",
-                    "2011/04/25",
-                    "$3,120"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ],
-                [
-                    "Garrett Winters",
-                    "Director",
-                    "Edinburgh",
-                    "8422",
-                    "2011/07/25",
-                    "$5,300"
-                ]
-            ]
-
             console.log("Data Table begin");
+            
+
             $('#myTable').DataTable({
-                data:data
+                ajax: {
+                    url: '/Proyek/'+2,
+                    dataSrc: ''
+                },
+                columns: [... ]
             });
+            $('myTable').DataTable({
+                ajax: {
+                    url: '/Proyek/2', // Replace 2 with the dynamic project ID if needed
+                    method: 'GET',
+                    dataSrc: function (json) {
+                        // Log the data to the console instead of displaying in the table
+                        console.log("Data from API:", json);
+                        return []; // Empty array so no data is displayed in the table
+                    }
+                },
+                columns: [
+                    { data: 'KodeSPR' },
+                    { data: 'Zona' },
+                    { data: 'TanggalSPR' },
+                    { data: 'TujuanSPR' },
+                    { data: 'NamaPeminta' },
+                    { data: 'NamaPenyetuju1' },
+                    { data: 'NamaPenyetuju2' },
+                    { data: 'AdaDetil' },
+                    { data: 'Status' },
+                    { data: 'Actions' }
+                ]
+            })
         });
     </script>
 
