@@ -6,6 +6,7 @@ var services = builder.Services;
 services.AddScoped<Address>();
 services.AddScoped<SPRRepository>();
 services.AddScoped<ProyekRepository>();
+services.AddScoped<MaterialRepository>();
 services.AddCors(e =>
 {
 

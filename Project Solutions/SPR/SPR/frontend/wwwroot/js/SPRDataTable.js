@@ -34,7 +34,16 @@
                 }
             },
             { data: 'tujuanSPR' },
-            { data: 'userPeminta.name' },
+            {
+                data: null,
+                render: (data) => {
+                    if (!data.userPeminta) {
+                        return "No user"
+                    } else {
+                        return data.userPeminta.name
+                    }
+                }
+            },
             {
                 data: null,
                 render: function (data) {

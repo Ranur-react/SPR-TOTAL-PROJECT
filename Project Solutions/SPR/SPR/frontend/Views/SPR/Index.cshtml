@@ -1,8 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Index";
+    //@addTagHelper *, Syncfusion.EJ2
 }
 @section HeaderTag{
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+    <link href="~/css/litepickerCustome.css" rel="stylesheet" />
+
 }
 <div class="row">
     <div class="col-md-6">
@@ -97,6 +100,14 @@
                 <div class="modal-body">
                     <form class="row g-3 needs-validation" id="sprForm" novalidate>
     <div class="col-md-12">
+
+        @*test datepicker*@
+        <label for="litepickerRangePluginEmp">Mondem Date</label>
+                                <div class="input-group input-group-joined" style="width: 16.5rem">
+                                    <span class="input-group-text"><i data-feather="calendar"></i></span>
+                                    <input class="form-control ps-0 pointer" id="litepickerRangePluginUniversal" placeholder="Select date range..." />
+                                </div>
+        @*end test*@
         <label for="tanggalMinta" class="form-label">Tanggal Minta</label>
         <input type="text" class="form-control datepicker" id="tanggalMinta" placeholder="Select Date">
         <div class="invalid-feedback">
@@ -177,8 +188,10 @@
 
 
     @section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
 
         <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
         <script>
             console.log("Custome Js here");
         </script>
@@ -186,6 +199,8 @@
         <script src="~/js/ProyekSelect.js"></script>
         <script src="~/js/SPRDataTable.js"></script>
         <script src="~/js/MintaSPRForm.js"></script>
+        <script src="https://cdn.syncfusion.com/ej2/27.1.48/dist/ej2.min.js"></script>
+
 
 
     }

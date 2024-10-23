@@ -1,16 +1,6 @@
 ﻿$(document).ready(function () {
     // Initialize datepicker for Bootstrap 5 (using a datepicker plugin)
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayHighlight: true
-    });
-    $("#datepicker-group").datepicker({
-        format: "dd-M-yyyy",
-        todayHighlight: true,
-        autoclose: true,
-        clearBtn: true
-    });
+   
     // Fetch material options from API and populate dropdown
     $.ajax({
         url: 'Material/GetAll', // Replace with your API endpoint

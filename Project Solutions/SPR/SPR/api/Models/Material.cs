@@ -20,8 +20,7 @@ namespace api.Models
         // stok material akan berkurang jika material insert kedalam DetilMaterial, Pengurangan akan terjadi oleh Trigger SQL dengan Formua (Maerial.Stock - Detil.Volume)
         // Begitupun sebaliknya, Trigger akan menambahkan Stock kedalam Material jika Material didalam Detil dihapus
         // kedepannya Trigger ini juga akan dapat dibuat jika Material didalam detil sudah di approved, jika belum di approved maka tidak akan berkurang, 
-        [JsonIgnore]
-        public virtual ICollection<DetilSPR>? DetilSPRs { get; set; }
+
     }
 }
 

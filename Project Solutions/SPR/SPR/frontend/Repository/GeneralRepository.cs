@@ -33,15 +33,24 @@ namespace frontend.Repository
 
         public async Task<List<TEntity>> Get()
         {
-            List<TEntity> entities = new List<TEntity>();
-
-            using (var response = await httpClient.GetAsync(request))
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<List<TEntity>>(apiResponse);
-            }
+                List<TEntity> entities = new List<TEntity>();
 
-            return entities;
+                using (var response = await httpClient.GetAsync(request))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    entities = JsonConvert.DeserializeObject<List<TEntity>>(apiResponse);
+                }
+
+                return entities;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Informations");
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
 

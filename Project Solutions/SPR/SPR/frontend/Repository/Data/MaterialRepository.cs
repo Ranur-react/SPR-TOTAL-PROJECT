@@ -9,7 +9,7 @@ namespace frontend.Repository.Data
         private readonly string request;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
-        public MaterialRepository(Address address, string request = "Proyek/") : base(address, request)
+        public MaterialRepository(Address address, string request = "Material/") : base(address, request)
         {
             this.address = address;
             this.request = request;
