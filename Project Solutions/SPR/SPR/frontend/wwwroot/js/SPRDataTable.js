@@ -2,11 +2,11 @@
     console.log("Data Table SPR begin");
     window.dataTableSPR = $('#tableSPR').DataTable({
         ajax: {
-            url: 'Proyek/GetAll', // Replace 2 with the dynamic project ID if needed
+            url: 'SPR/GetAll', // Replace 2 with the dynamic project ID if needed
             method: 'GET',
             dataSrc: function (json) {
                 // Log the data to the console instead of displaying in the table
-                console.log("Data from API:");
+                console.log("Data from API SPR:");
                 console.log(json.spRs);
                 if (!json.spRs) return [];
                 let FilteredJson = json.spRs.filter(item => item !== null)
