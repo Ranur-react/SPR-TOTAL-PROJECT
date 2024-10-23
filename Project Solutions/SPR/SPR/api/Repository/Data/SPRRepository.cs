@@ -56,7 +56,6 @@ namespace api.Repository.Data
                     content.TanggalRencanaTerima = content.TanggalMinta.AddDays(14);
                 }
 
-
                 //Ambil Nomor Urut Project dalam bulan ini yang sudah masuk SPR
                 var newSPRNo = GenerateSPRNoAsync(content.ProyekId, content.TanggalMinta).Result;
                 //Build SPR Formating
@@ -69,7 +68,7 @@ namespace api.Repository.Data
                     UserPemintaId = content.UserPemintaId,
                     TujuanSPR = content.TujuanSPR,
                     TanggalMinta = content.TanggalMinta,
-                    StatusSPR = content.StatusSPR,
+                    StatusSPR = content?.StatusSPR ?? "Created",
                     ProyekId = content.ProyekId,
 
                 };
