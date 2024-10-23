@@ -1,16 +1,14 @@
-﻿
-$(document).ready(function () {
-    console.log("Data Table begin");
-
-
-    $('#myTable').DataTable({
+﻿$(document).ready(function () {
+    console.log("Data Table SPR begin");
+    window.dataTableSPR = $('#tableSPR').DataTable({
         ajax: {
-            url: 'Proyek/Get/2', // Replace 2 with the dynamic project ID if needed
+            url: 'Proyek/GetAll', // Replace 2 with the dynamic project ID if needed
             method: 'GET',
             dataSrc: function (json) {
                 // Log the data to the console instead of displaying in the table
                 console.log("Data from API:");
                 console.log(json.spRs);
+                if (!json.spRs) return [];
                 let FilteredJson = json.spRs.filter(item => item !== null)
                 return FilteredJson; // Empty array so no data is displayed in the table
             }
@@ -66,5 +64,6 @@ $(document).ready(function () {
                 }
             }
         ]
-    })
-});
+    });
+
+})

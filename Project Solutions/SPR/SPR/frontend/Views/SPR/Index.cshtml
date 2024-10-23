@@ -12,9 +12,6 @@
             <div class="card-body">
                 <label for="proyekSelect" class="form-label">Pilih Proyek</label>
                 <select id="proyekSelect" class="form-select" aria-label="Pilih Proyek">
-                    <option value="1" selected>Proyek Tahap 1</option>
-                    <option value="2">Proyek Tahap 2</option>
-                    <option value="3">Proyek Tahap 3</option>
                 </select>
                 <p><strong>Tanggal Mulai:</strong> <span id="proyekTanggalStart">2024-10-22</span></p>
                 <p><strong>Tanggal Selesai</strong> <span id="proyekTanggalEnd">2024-10-22</span></p>
@@ -22,13 +19,20 @@
         </div>
     </div>
     <div class="col-md-6">
-        <h5>Detail Informasi User</h5>
-        <div class="card">
-            <div class="card-body">
-                <p><strong>Nama User</strong> <span id="usernameProyek">Jhon Doe</span></p>
-                <p><strong>Jabatan</strong> <span id="jabatanProyek">Super Admin</span></p>
+        <row>
+            <h5>Detail Informasi User</h5>
+            <div class="card">
+                <div class="card-body">
+                    <p><strong>Nama User</strong> <span id="usernameProyek">Jhon Doe</span></p>
+                    <p><strong>Jabatan</strong> <span id="jabatanProyek">Super Admin</span></p>
+                </div>
             </div>
-        </div>
+        </row>
+        <row>
+            <div class="d-grid gap-2 mt-1">
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajukan SPR</button>
+            </div>
+        </row>
     </div>
 <div class="row">
     <div class="col-md-12">
@@ -48,7 +52,7 @@
 </div>
 <div class="row">
 
-    <table id="myTable" class="display">
+        <table id="tableSPR" class="display">
         <thead>
             <tr>
                 <th>Kode SPR </th>
@@ -83,6 +87,24 @@
 </div>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @section Scripts{
@@ -93,7 +115,7 @@
     </script>
         <script src="~/js/_Helper.js"></script>
         <script src="~/js/ProyekSelect.js"></script>
-    <script src="~/js/SPRDataTable.js"></script>
+        <script src="~/js/SPRDataTable.js"></script>
 
 
 }
