@@ -34,8 +34,7 @@ namespace api.Models
         [Required(ErrorMessage = "User Peminta ID harus diisi")]
         public Guid UserPemintaId { get; set; }  // Id User tetap menggunakan tipe int
         public virtual User? UserPeminta { get; set; }  // Navigasi ke User Peminta
-        [JsonIgnore]
-        public virtual Proyek? Proyek { get; set; }  // Navigasi ke Proyek
+        public virtual Proyek Proyek { get; set; }  // Navigasi ke Proyek
         public virtual ICollection<ApprovalSPR>? ApprovalSPRs { get; set; }
         public virtual ICollection<DetilSPR>? DetilSPRs { get; set; }
 

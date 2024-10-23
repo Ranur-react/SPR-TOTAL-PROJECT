@@ -1,7 +1,17 @@
 using frontend.Base;
+using frontend.Repository.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+services.AddScoped<Address>();
+services.AddScoped<SPRRepository>();
+services.AddScoped<ProyekRepository>();
+services.AddCors(e =>
+{
 
+    e.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    //                e.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44309/TestCors"));
+});
 
 // Bind konfigurasi dari appsettings.json
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
@@ -25,7 +35,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseCors(options =>
+          options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+          //options.WithOrigins("https://localhost:44309")
+          );
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

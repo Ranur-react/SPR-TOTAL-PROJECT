@@ -5,79 +5,95 @@
 @section HeaderTag{
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
 }
-<table id="myTable" class="display">
-    <thead>
-        <tr>
-            <th>Kode SPR</th>
-            <th>Zona</th>
-            <th>Tanggal SPR</th>
-            <th>Tujuan SPR</th>
-            <th>Nama Peminta</th>
-            <th>Nama Penyetuju 1</th>
-            <th>Nama Penyetuju 2</th>
-            <th>Ada Detil</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
+<div class="row">
+    <div class="col-md-6">
+        <h5>Detail Informasi Proyek</h5>
+        <div class="card">
+            <div class="card-body">
+                <label for="proyekSelect" class="form-label">Pilih Proyek</label>
+                <select id="proyekSelect" class="form-select" aria-label="Pilih Proyek">
+                    <option value="1" selected>Proyek Tahap 1</option>
+                    <option value="2">Proyek Tahap 2</option>
+                    <option value="3">Proyek Tahap 3</option>
+                </select>
+                <p><strong>Tanggal Mulai:</strong> <span id="proyekTanggalStart">2024-10-22</span></p>
+                <p><strong>Tanggal Selesai</strong> <span id="proyekTanggalEnd">2024-10-22</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h5>Detail Informasi User</h5>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Nama User</strong> <span id="usernameProyek">Jhon Doe</span></p>
+                <p><strong>Jabatan</strong> <span id="jabatanProyek">Super Admin</span></p>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-12">
+        <h5>Pencarian SPR</h5>
+        <div class="card">
+            <div class="card-body">
+                    <label for="pencarianSelect" class="form-label">Pencarian Berdasarkan</label>
+                    <select id="pencarianSelect" class="form-select" aria-label="Pilih">
+                        <option value="1" selected>KODE SPR</option>
+                        <option value="2">Tujuan Proyek</option>
+                        <option value="3">Tanggal Permintaan</option>
+                        <option value="4">Zona</option>
+                    </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
 
-    </tbody>
-</table>
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Kode SPR </th>
+                <th>Zona</th>
+                <th>Tanggal SPR</th>
+                <th>Tujuan SPR</th>
+                <th>Nama Peminta</th>
+                <th>Nama Penyetuju 1 </th>
+                <th>Nama Penyetuju 2</th>
+                <th>Ada Detil</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+
 
 
 @section Scripts{
 
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script>
-        console.log("Helllow World");
-        $(document).ready(function () {
-            console.log("Data Table begin");
-            
-
-            $('#myTable').DataTable({
-                ajax: {
-                    url: '/Proyek/'+2,
-                    dataSrc: ''
-                },
-                columns: [... ]
-            });
-            $('myTable').DataTable({
-                ajax: {
-                    url: '/Proyek/2', // Replace 2 with the dynamic project ID if needed
-                    method: 'GET',
-                    dataSrc: function (json) {
-                        // Log the data to the console instead of displaying in the table
-                        console.log("Data from API:", json);
-                        return []; // Empty array so no data is displayed in the table
-                    }
-                },
-                columns: [
-                    { data: 'KodeSPR' },
-                    { data: 'Zona' },
-                    { data: 'TanggalSPR' },
-                    { data: 'TujuanSPR' },
-                    { data: 'NamaPeminta' },
-                    { data: 'NamaPenyetuju1' },
-                    { data: 'NamaPenyetuju2' },
-                    { data: 'AdaDetil' },
-                    { data: 'Status' },
-                    { data: 'Actions' }
-                ]
-            })
-        });
+        console.log("Custome Js here");        
     </script>
+        <script src="~/js/_Helper.js"></script>
+        <script src="~/js/ProyekSelect.js"></script>
+    <script src="~/js/SPRDataTable.js"></script>
+
 
 }

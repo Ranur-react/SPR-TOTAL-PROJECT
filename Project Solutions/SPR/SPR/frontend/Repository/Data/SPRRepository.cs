@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace frontend.Repository.Data
 {
-    public class SPRRepository : GeneralRepository<Proyek,String>
+    public class SPRRepository : GeneralRepository<SPR,String>
     {
         private readonly Address address;
         private readonly string request;
@@ -23,16 +23,16 @@ public SPRRepository(Address address, string request="SPR/"):base(address, reque
             //httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + address.JWToken);
 
         }
-        public async Task<Proyek> GetSPRProyek
-            (int IdProyek)
+        public async Task<SPR> GetSPRSPR
+            (int IdSPR)
         {
-            Proyek entities = new Proyek();
+            SPR entities = new SPR();
 
 
-            using (var response = await httpClient.GetAsync(address.APILink + $"Proyek/{IdProyek}"))
+            using (var response = await httpClient.GetAsync(address.APILink + $"SPR/{IdSPR}"))
             {
                 string apiResponse = response.Content.ReadAsStringAsync().Result;
-                entities = JsonConvert.DeserializeObject<Proyek>(apiResponse);
+                entities = JsonConvert.DeserializeObject<SPR>(apiResponse);
             }
 
             return entities;
