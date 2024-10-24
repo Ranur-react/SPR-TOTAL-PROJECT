@@ -1,6 +1,8 @@
 ﻿using api.Models;
+using api.Models.ViewModel;
 using frontend.Base;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace frontend.Repository.Data
 {
@@ -23,19 +25,45 @@ public SPRRepository(Address address, string request="SPR/"):base(address, reque
             //httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + address.JWToken);
 
         }
-        public async Task<SPR> GetSPRSPR
-            (int IdSPR)
+        public async Task<RequestForm> CreateSPR(SPRContentDetilView entity)
         {
-            SPR entities = new SPR();
+            try {
+                RequestForm entities =new RequestForm();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+                using (var response = httpClient.PostAsync(address.APILink+ "SPR/CreateSPR", content).Result)
+                {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    entities = JsonConvert.DeserializeObject<RequestForm>(apiResponse);
+                }
 
-
-            using (var response = await httpClient.GetAsync(address.APILink + $"SPR/{IdSPR}"))
-            {
-                string apiResponse = response.Content.ReadAsStringAsync().Result;
-                entities = JsonConvert.DeserializeObject<SPR>(apiResponse);
+                return entities;
             }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<List<SPR>> GetSPRByProject(int proyekId)
+        {
+            try
+            {
+                List<SPR> entities = new List<SPR>();
 
-            return entities;
+
+                using (var response = await httpClient.GetAsync(address.APILink + $"SPR/GetSPRByProject/{proyekId}"))
+                {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    entities = JsonConvert.DeserializeObject<List<SPR>>(apiResponse);
+                }
+
+                return entities;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
 
         }

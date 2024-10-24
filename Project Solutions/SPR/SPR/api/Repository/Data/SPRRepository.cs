@@ -14,7 +14,10 @@ namespace api.Repository.Data
         {
             this.myContext = myContext;
         }
-
+        public IEnumerable<SPR> GetSPRByProject(int projectId) { 
+            var results = myContext.Headers_SP.Where(e=>e.ProyekId == projectId).ToList();
+            return results;
+        }
         public int CreateSPR(SPR content)
         {
             try
@@ -38,10 +41,6 @@ namespace api.Repository.Data
                 return 0;
             }
         }
-
-
-
-
         public int CreateSPRWithDetails(SPRContentDetilView content)
         {
             try
@@ -97,13 +96,6 @@ namespace api.Repository.Data
             }
 
         }
-
-
-
-
-
-
-
         public async Task<string> GenerateSPRNoAsync(int proyekId, DateTime tanggalMinta)
         {
             var bulan = tanggalMinta.Month;

@@ -23,7 +23,9 @@
                 } else {
                     console.log("the first index data Proyek");
                     console.log(data[0]);
-                    window.dataTableSPR.ajax.url('Proyek/Get/' + data[0].id).load();
+
+                    console.log("Data from API SPR/GetSPRByProject/" + data[0].id);
+                    window.dataTableSPR.ajax.url('SPR/GetSPRByProject?proyekId=' + data[0].id).load();
                 }
             },
             error: function (error) {
@@ -70,7 +72,9 @@
         var selectedId = $(this).val();
         getProyekDetail(selectedId); // Panggil fungsi untuk mendapatkan detail proyek
         // Reload the DataTable with the new Proyek ID
-        window.dataTableSPR.ajax.url('Proyek/Get/' + selectedId).load();
+        console.log("Data from API SPR/GetSPRByProject/" + selectedId);
+        window.dataTableSPR.ajax.url('SPR/GetSPRByProject?proyekId=' + selectedId).load();
+
     });
 
     // Ambil data proyek saat halaman dimuat

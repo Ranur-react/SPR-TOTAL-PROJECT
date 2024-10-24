@@ -18,7 +18,9 @@ services.AddCors(e =>
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 var app = builder.Build();
 

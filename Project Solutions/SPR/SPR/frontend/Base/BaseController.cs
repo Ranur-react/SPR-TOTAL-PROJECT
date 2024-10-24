@@ -40,7 +40,7 @@ namespace frontend.Base
             {
 
                 return Json(new { Message = e.Message });
-            }
+            }   
         }
 
         [HttpPut]

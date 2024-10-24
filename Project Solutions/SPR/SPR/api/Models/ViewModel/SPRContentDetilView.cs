@@ -15,13 +15,11 @@ namespace api.Models.ViewModel
         [Required(ErrorMessage = "Tanggal permintaan harus diisi")]
         public DateTime TanggalMinta { get; set; }
 
-        [Required(ErrorMessage = "Status SPR harus diisi")]
         [StringLength(50, ErrorMessage = "Status SPR tidak boleh lebih dari 50 karakter")]
-        public String StatusSPR { get; set; }
+        public String? StatusSPR { get; set; }
 
-        [Required(ErrorMessage = "Zona SPR harus diisi")]
         [StringLength(3, ErrorMessage = "Zona SPR harus memiliki panjang 3 karakter")]
-        public String ZonaSPR { get; set; } = "000";
+        public String? ZonaSPR { get; set; } = "000";
 
         [Required(ErrorMessage = "Tujuan SPR harus diisi")]
         [StringLength(200, ErrorMessage = "Tujuan SPR tidak boleh lebih dari 200 karakter")]
