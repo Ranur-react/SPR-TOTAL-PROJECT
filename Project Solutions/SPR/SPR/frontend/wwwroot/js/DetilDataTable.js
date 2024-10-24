@@ -37,25 +37,10 @@
                 data: null,
                 render: (data) => {
                     //if (!data.materialId) {
-                        if (true) {
+                    if (!data.namaMaterial) {
                         return "No Material";
                     } else {
-                        // Make an AJAX call to get the material name
-                        let materialName = "Loading...";  // Default placeholder
-
-                        $.ajax({
-                            url: `Material/Get/${data.materialId}`, // Replace with your API
-                            method: 'GET',
-                            async: false, // Make it synchronous to wait for the result
-                            success: function (materialData) {
-                                materialName = materialData.namaMaterial; // Replace with actual attribute
-                            },
-                            error: function () {
-                                materialName = "Unknown Material"; // Fallback if API fails
-                            }
-                        });
-
-                        return materialName;  // Return the name to be displayed in the table
+                        return data.namaMaterial
                     }
                 }
             },
@@ -63,25 +48,10 @@
                 data: null,
                 render: function (data) {
                     //if (!data.materialId) {
-                        if (true) {
+                    if (!data.namaMaterial) {
                         return "No Material";
                     } else {
-                        // Make an AJAX call to get the material name
-                        let materialName = "Loading...";  // Default placeholder
-
-                        $.ajax({
-                            url: `Material/Get/${data.materialId}`, // Replace with your API
-                            method: 'GET',
-                            async: false, // Make it synchronous to wait for the result
-                            success: function (materialData) {
-                                materialName = materialData.tipeMaterial==0?'Pokok':'Non Pokok'; // Replace with actual attribute
-                            },
-                            error: function () {
-                                materialName = "Unknown Material Type"; // Fallback if API fails
-                            }
-                        });
-
-                        return materialName;  // Return the name to be displayed in the table
+                        return data.tipeMaterial == 0 ? "Pokok" : "Non Pokok";
                     }
                 }
                 

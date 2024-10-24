@@ -38,7 +38,7 @@
             tanggalMinta: $('#tanggalMinta').val() ? new Date($('#tanggalMinta').val()).toISOString() : new Date("0001-01-01").toISOString(),
             zonaSPR: $('#zonaSPR').val(),
             tujuanSPR: $('#tujuanSPR').val(),
-            proyekId: 2, // Replace this with the selected project ID from your page
+            proyekId: $("#proyekSelect").val(), // Replace this with the selected project ID from your page
             userPemintaId: "6f09d97c-4d35-472f-bf72-68a29f62ecfa", // Replace with actual user ID (temporary)
             materialId: $('#materialId').val(),
             volume: $('#volume').val(),
@@ -58,6 +58,8 @@
             success: function (response) {
                 alert('Form submitted successfully!');
                 console.log(response);
+                window.dataTableSPR.ajax.url('SPR/GetSPRByProject?proyekId=' + $("#proyekSelect").val()).load();
+
             },
             error: function (xhr, status, error,etc) {
                 // Cek jika responseText tidak kosong dan coba parsing manual
