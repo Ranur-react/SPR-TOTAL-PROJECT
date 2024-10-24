@@ -1,5 +1,8 @@
 ﻿using api.Models;
+using api.Models.ViewModel;
 using frontend.Base;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace frontend.Repository.Data
 {
@@ -20,5 +23,27 @@ namespace frontend.Repository.Data
                 BaseAddress = new Uri(address.APILink)
             };
         }
+        public async Task<RequestForm> GetBySPR(String SPRKode)
+        {
+            try
+            {
+                RequestForm entities = new RequestForm();
+                //StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+                using (var response = httpClient.GetAsync(address.APILink + "DetilSPR/GetBySPR/" + SPRKode).Result)
+                {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    entities = JsonConvert.DeserializeObject<RequestForm>(apiResponse);
+                }
+
+                return entities;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+
+            }
+        }
+
     }
 }

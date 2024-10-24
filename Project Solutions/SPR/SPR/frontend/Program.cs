@@ -7,6 +7,7 @@ services.AddScoped<Address>();
 services.AddScoped<SPRRepository>();
 services.AddScoped<ProyekRepository>();
 services.AddScoped<MaterialRepository>();
+services.AddScoped<DetilSPRRepository>();
 services.AddCors(e =>
 {
 
@@ -44,6 +45,6 @@ app.UseCors(options =>
           );
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=SPR}/{action=Index}/{id?}");
 
 app.Run();

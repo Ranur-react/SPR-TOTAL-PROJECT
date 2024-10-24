@@ -72,8 +72,7 @@
             {
                 data: null,
                 render: function (data, type, row) {
-                    //return `<button class="btn btn-primary" onclick="viewSPRDetails('${row.id}')">View</button>`;
-                    return `<button class="btn btn-primary" onclick="console.log('${row.id}')">View</button>`;
+                    return `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDetil" onclick="viewSPRDetails('${row.id}')">View Detil</button>`;
                 }
             }
         ]

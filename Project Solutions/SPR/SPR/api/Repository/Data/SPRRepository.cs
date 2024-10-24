@@ -18,6 +18,7 @@ namespace api.Repository.Data
             var results = myContext.Headers_SP.Where(e=>e.ProyekId == projectId).ToList();
             return results;
         }
+
         public int CreateSPR(SPR content)
         {
             try

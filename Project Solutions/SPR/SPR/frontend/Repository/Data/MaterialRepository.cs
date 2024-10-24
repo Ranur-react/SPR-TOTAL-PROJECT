@@ -9,11 +9,12 @@ namespace frontend.Repository.Data
         private readonly string request;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
+
         public MaterialRepository(Address address, string request = "Material/") : base(address, request)
         {
             this.address = address;
             this.request = request;
-            _contextAccessor = new HttpContextAccessor();
+            this._contextAccessor = new HttpContextAccessor();
             httpClient = new HttpClient
             {
                 BaseAddress = new Uri(address.APILink)

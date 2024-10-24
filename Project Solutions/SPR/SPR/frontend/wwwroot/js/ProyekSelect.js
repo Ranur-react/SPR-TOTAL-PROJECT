@@ -41,8 +41,6 @@
 
         // Tambahkan opsi proyek baru
         $.each(data, function (index, proyek) {
-            console.log("maping file object proyek")
-            console.log(proyek)
             $select.append(new Option(proyek.namaProyek, proyek.id));
         });
 
