@@ -19,7 +19,7 @@
 
 <!-- Modal -->
 @Html.Partial("ModalFormSPR")
-@Html.Partial("Detil/ModalListDetilSPR")
+@Html.Partial("Detil/ModalListDetil")
 
 
 @section Scripts{
@@ -28,12 +28,15 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 
     <script>
-        console.log("Custome Js here");
+       //Global variabel
+        let varShareSPRid = "";
+
     </script>
     <script src="~/js/_Helper.js"></script>
     <script src="~/js/ProyekSelect.js"></script>
     <script src="~/js/SPRDataTable.js"></script>
     <script src="~/js/MintaSPRForm.js"></script>
     <script src="~/js/DetilDataTable.js"></script>
+    <script src="~/js/TambahDetilSPRForm.js"></script>
 
     }

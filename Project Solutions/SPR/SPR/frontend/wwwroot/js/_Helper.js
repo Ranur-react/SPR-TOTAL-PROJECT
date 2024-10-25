@@ -8,3 +8,17 @@
     // Mengembalikan tanggal dalam format "DD-MMM-YYYY"
     return `${day}-${month}-${year}`;
 }
+$(document).ready(function () {
+
+   window.getMaterial= $.ajax({
+        url: 'Material/GetAll', // Replace with your API endpoint
+        method: 'GET',
+        success: function (data) {
+            let materialSelect = $('.materialId');
+            materialSelect.empty(); // Clear previous options
+            data.forEach(material => {
+                materialSelect.append(`<option value="${material.id}">${material.namaMaterial} (${material.tipeMaterial == 0 ? "Pokok" : "Non Pokok"})</option>`);
+            });
+        }
+    });
+});

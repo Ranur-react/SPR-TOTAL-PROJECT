@@ -1,14 +1,14 @@
 ﻿$(document).ready(function () {
-    console.log("Data Table SPR begin");
-                console.log("Data from API SPR/GetALL :");
+    //console.log("Data Table SPR begin");
+                //console.log("Data from API SPR/GetALL :");
     window.dataTableSPR = $('#tableSPR').DataTable({
         ajax: {
             url: 'SPR/GetAll', // Replace 2 with the dynamic project ID if needed
             method: 'GET',
             dataSrc: function (json) {
-                console.log(" Mendapatkan data SPR . . .")
+                //console.log(" Mendapatkan data SPR . . .")
                 // Log the data to the console instead of displaying in the table
-                console.log(json);
+                //console.log(json);
                 if (!json) return [];
                 let FilteredJson = json.filter(item => item !== null)
                 return json; // Empty array so no data is displayed in the table

@@ -1,0 +1,39 @@
+﻿<div class="col-md-12">
+    <label for="materialId" class="form-label">Material</label>
+    <select class="form-select materialId" id="materialDetilId" required>
+        <option selected disabled value="">Choose Material...</option>
+        <!-- Options will be populated via AJAX -->
+    </select>
+    <div class="invalid-feedback">
+        Please select a valid material.
+    </div>
+</div>
+
+<div class="col-md-6">
+    <label for="volume" class="form-label">Volume</label>
+    <input type="number" class="form-control" id="volumeDetil" value="5" required>
+    <div class="invalid-feedback">
+        Please provide a valid volume.
+    </div>
+</div>
+<div class="col-md-6">
+    <label for="unit" class="form-label">Unit</label>
+    <select class="form-select" id="unitDetil" required>
+        <option value="m">m</option>
+        <option value="m²">m²</option>
+        <option value="m³">m³</option>
+        <option value="kg">kg</option>
+        <option value="sak">sak</option>
+        <option value="batang">batang</option>
+    </select>
+    <div class="invalid-feedback">
+        Please select a valid unit.
+    </div>
+</div>
+<div class="col-md-12">
+    <label for="tanggalRencanaTerima" class="form-label">Tanggal Rencana Terima</label>
+    <input type="text" class="form-control datepicker" id="tanggalRencanaTerimaDetil" placeholder="YYYY-MM-DD (Kosongkan saja jika tanggal terima 14 hari lagi)">
+    <div class="invalid-feedback">
+        tulis errrot tanggal disini
+    </div>
+</div>

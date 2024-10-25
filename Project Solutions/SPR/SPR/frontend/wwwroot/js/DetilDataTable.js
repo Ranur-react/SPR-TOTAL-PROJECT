@@ -1,16 +1,16 @@
 ﻿$(document).ready(function () {
-    console.log("Data Table Detil  begin");
-    console.log("Data from API SPR/GetALL :");
+    //console.log("Data Table Detil  begin");
+    //console.log("Data from API SPR/GetALL :");
     window.dataTableDetil = $('#tableDetil').DataTable({
         ajax: {
             url: 'DetilSPR/GetAll', // Replace 2 with the dynamic project ID if needed
             method: 'GET',
             dataSrc: function (json) {
-                console.log(" Mendapatkan data Detil . . .")
+                //console.log(" Mendapatkan data Detil . . .")
 
 
                 // Log the data to the console instead of displaying in the table
-                console.log(json);
+                //console.log(json);
 
                 if (json.code == 200) return json.data;
                 //return no data if not data
@@ -68,12 +68,17 @@
                     return data;
                 }
             },
-            { data: 'statusDisetujui' },
+            {
+                data: 'statusDisetujui',
+                render: (value) => {
+                    return value?'Disetujui':'Belum Disetujui'
+                }
+            },
             {
                 data: null,
                 render: function (data, type, row) {
                     //return `<button class="btn btn-primary" onclick="viewSPRDetails('${row.id}')">View</button>`;
-                    return `<button type="button" class="btn btn-outline-danger" onclick="console.log('${row.id}')">Delete</button>`;
+                    return `<button type="button" class="btn btn-outline-danger" onclick="HapusMaterilDetil('${row.id}')">Delete</button>`;
                 }
             }
         ]
@@ -81,16 +86,24 @@
 
 });
 
-$('#modalDetil').on('shown.bs.modal', function () {
-    console.log("Modal Detil muncul");
-});
+//$('#modalDetil').on('shown.bs.modal', function () {
+//    console.log("Modal Detil muncul, panggil material");
+//    window.getMaterial;
+//});
 function viewSPRDetails(SPRid) {
-    console.log("Tombol Action diklik untuk SPRid:", SPRid);
-
+    varShareSPRid = SPRid;
+    //console.log("Tombol Action diklik untuk SPRid:", SPRid);
     // Ganti URL sumber data untuk dataTableDetil berdasarkan SPRid yang dipilih
-    window.dataTableDetil.ajax.url(`DetilSPR/GetBySPR?SPRKode=${SPRid}`).load(function () {
-    //window.dataTableDetil.ajax.url(`DetilSPR/GetAll`).load(function () {
-        // Setelah data terload, tampilkan modal
-        //$('#detilModal').modal('show');
+    window.dataTableDetil.ajax.url(`DetilSPR/GetBySPR?SPRKode=${SPRid}`).load();
+
+}
+const HapusMaterilDetil=(detilId) => {
+    $.ajax({
+        url: 'DetilSPR/Delete/'+detilId, // Replace with your API endpoint
+        method: 'DELETE',
+        success: function (data) {
+            alert(`Hapus detil material untuk SPRid:${varShareSPRid} berhasil`);
+            window.dataTableDetil.ajax.url(`DetilSPR/GetBySPR?SPRKode=${varShareSPRid}`).load();
+        }
     });
 }

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    console.log("Halaman pertama dimuat")
+    //console.log("Halaman pertama dimuat")
   
     // Fungsi untuk mengambil parameter dari URL
     function getParameterByName(name) {
@@ -13,18 +13,18 @@
             url: "Proyek/GetAll",
             method: "GET",
             success: function (data) {
-                console.log("Semua Data Proyek");
-                console.log(data);
+                //console.log("Semua Data Proyek");
+                //console.log(data);
                 updateProyekSelect(data);
                 // Cek apakah ada ProyekId di URL
                 const proyekId = getParameterByName('key');
                 if (proyekId) {
                     $("#proyekSelect").val(proyekId).change(); // Pilih proyek yang sesuai dan trigger perubahan
                 } else {
-                    console.log("the first index data Proyek");
-                    console.log(data[0]);
+                    //console.log("the first index data Proyek");
+                    //console.log(data[0]);
 
-                    console.log("Data from API SPR/GetSPRByProject/" + data[0].id);
+                    //console.log("Data from API SPR/GetSPRByProject/" + data[0].id);
                     window.dataTableSPR.ajax.url('SPR/GetSPRByProject?proyekId=' + data[0].id).load();
                 }
             },
@@ -66,11 +66,11 @@
      
     // Event listener untuk perubahan dropdown proyek
     $("#proyekSelect").change(function () {
-        console.log("Proyek Diganti")
+        //console.log("Proyek Diganti")
         var selectedId = $(this).val();
         getProyekDetail(selectedId); // Panggil fungsi untuk mendapatkan detail proyek
         // Reload the DataTable with the new Proyek ID
-        console.log("Data from API SPR/GetSPRByProject/" + selectedId);
+        //console.log("Data from API SPR/GetSPRByProject/" + selectedId);
         window.dataTableSPR.ajax.url('SPR/GetSPRByProject?proyekId=' + selectedId).load();
 
     });

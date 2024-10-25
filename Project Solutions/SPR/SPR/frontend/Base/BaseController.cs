@@ -28,7 +28,7 @@ namespace frontend.Base
         }
 
         [HttpPost]
-        public ActionResult<TEntity> Post(TEntity entity)
+        public ActionResult<TEntity> Post([FromBody]  TEntity entity)
         {
             var result = repository.Post(entity);
             try

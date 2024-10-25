@@ -1,43 +1,40 @@
 ﻿
 $(document).ready(function () {
 
-    $('#staticBackdrop').on('shown.bs.modal', function () {
-        console.log("Modal SPR muncul, panggil material");
-
+    $('#modalDetil').on('shown.bs.modal', function () {
+        console.log("Modal Detil muncul, panggil material");
         window.getMaterial;
     });
 
 
     // Handle form submission
-    $('#sprForm').submit(function (event) {
+    $('#detilForm').submit(function (event) {
         event.preventDefault(); // Prevent default form submission
-        //console.log("SPR Form Submitted");
+        console.log("Detil Form Submitted");
         // Get form values
         let formData = {
-            tanggalMinta: $('#tanggalMinta').val() ? new Date($('#tanggalMinta').val()).toISOString() : new Date("0001-01-01").toISOString(),
-            zonaSPR: $('#zonaSPR').val(),
-            tujuanSPR: $('#tujuanSPR').val(),
-            proyekId: $("#proyekSelect").val(), // Replace this with the selected project ID from your page
+            SPRId: varShareSPRid, // SPR id yang dikoleksi oleh Globa variabel pada tabel DetilDataTable
             userPemintaId: "6f09d97c-4d35-472f-bf72-68a29f62ecfa", // Replace with actual user ID (temporary)
-            materialId: $('#materialId').val(),
-            volume: $('#volume').val(),
-            unit: $('#unit').val(),
+            materialId: $('#materialDetilId').val(),
+            volume: $('#volumeDetil').val(),
+            unit: $('#unitDetil').val(),
             // Sertakan default value jika tanggalRencanaTerima tidak diisi
-            tanggalRencanaTerima: $('#tanggalRencanaTerima').val() ? new Date($('#tanggalRencanaTerima').val()).toISOString() : new Date("0001-01-01").toISOString()
+            tanggalRencanaTerima: $('#tanggalRencanaTerimaDetil').val() ? new Date($('#tanggalRencanaTerimaDetil').val()).toISOString() : new Date("0001-01-01").toISOString()
         };
 
-        //console.log("formData result before send to API . . .");
-        //console.log(formData);
+        console.log("formData result before send to API DetilSPR/Post. . .");
+        console.log(formData);
         // Send POST request to API
         $.ajax({
-            url: 'SPR/CreateSPR', // Replace with your POST API endpoint
+            url: 'DetilSPR/Post', // Replace with DetilSPR POST API endpoint
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {
-                alert('Form submitted successfully!');
+                alert('Form DetilSPR submitted successfully!');
                 //console.log(response);
-                window.dataTableSPR.ajax.url('SPR/GetSPRByProject?proyekId=' + $("#proyekSelect").val()).load();
+                window.dataTableDetil.ajax.url(`DetilSPR/GetBySPR?SPRKode=${varShareSPRid}`).load();
+
 
             },
             error: function (xhr, status, error,etc) {
