@@ -6,4 +6,4 @@ WORKDIR /app
 EXPOSE 4002
 
 COPY ./publish .
-ENTRYPOINT ["dotnet", "API.dll"]
+ENTRYPOINT ["dotnet", "frontend.dll"]
