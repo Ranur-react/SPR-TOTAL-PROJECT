@@ -1,0 +1,17 @@
+docker run \
+  --name router1 \
+  --detach \
+  --network jenkins \
+  --publish 3000:3000 \
+  --publish 3002:3002 \
+  alpine \
+  sh -c "while true; do sleep 1000; done"
+
+
+docker run \
+  --name router1 \
+  --detach \
+  --network jenkins \
+  --publish 3000:3000 \
+  --publish 3002:3002 \
+  nginx
