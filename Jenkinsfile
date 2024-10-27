@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     
     stages {
 
@@ -6,11 +7,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    try {
                         sh 'docker ps'
-                    } catch (Exception e) {
-                        echo "Testing failed"
-                    }
                 }
             }
         }
