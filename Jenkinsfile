@@ -6,7 +6,7 @@ pipeline {
         imageName = "ranur/fe-spr:6.0"
         BRANCH = "release5.0"
         NODE="dotnet2"
-        PORT="80"
+        PORT="4002"
         PORT_PULISH="4002"
         ROOTDIR="SPR-TOTAL-PROJECT"
         SUBDIRECTORY = "1. Front Eend - ASPNETCore"
