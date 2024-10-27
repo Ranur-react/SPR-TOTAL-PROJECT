@@ -2,8 +2,7 @@ using frontend.Base;
 using frontend.Repository.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://*:4002");
-builder.WebHost.UseUrls("https://*:4002");
+
 var services = builder.Services;
 services.AddScoped<Address>();
 services.AddScoped<SPRRepository>();
@@ -36,8 +35,10 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    //app.Urls.Add("http://*:4002");
-    //app.Urls.Add("https://*:4002");
+    builder.WebHost.UseUrls("http://*:4002");
+    builder.WebHost.UseUrls("https://*:4002");
+    app.Urls.Add("http://*:4002");
+    app.Urls.Add("https://*:4002");
 }
 
 
