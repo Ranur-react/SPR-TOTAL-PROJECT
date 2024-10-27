@@ -77,7 +77,7 @@ pipeline {
 
         stage('Run New Container') {
             steps {
-                sh "docker run -d --name ${NODE} -p ${PORT_PULISH}:${PORT} ${imageName}"
+                sh "docker run -d --name ${NODE} -p ${PORT}:${PORT_PULISH} ${imageName}"
             }
         }
 
