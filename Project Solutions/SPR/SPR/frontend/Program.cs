@@ -2,7 +2,7 @@ using frontend.Base;
 using frontend.Repository.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("https://*:4002");
+builder.WebHost.UseUrls("http://*:4002");
 
 var services = builder.Services;
 services.AddScoped<Address>();
