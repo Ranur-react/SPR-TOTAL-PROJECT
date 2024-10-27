@@ -34,8 +34,8 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    app.Urls.Add("http://*:4002");
-    app.Urls.Add("https://*:4002");
+    //app.Urls.Add("http://*:4002");
+    //app.Urls.Add("https://*:4002");
 }
 
 
