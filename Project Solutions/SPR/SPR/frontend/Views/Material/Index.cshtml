@@ -1,7 +1,15 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@section HeaderTag{
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
 }
+<div class="row">
+    @Html.Partial("ListMaterial")
+</div>
 
-<h1>Index</h1>
 
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="~/js/_Helper.js"></script>
+    <script src="~/js/Material/MaterialDataTable.js"></script>
+    }

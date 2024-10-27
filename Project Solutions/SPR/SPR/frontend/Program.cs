@@ -2,7 +2,6 @@ using frontend.Base;
 using frontend.Repository.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://*:4002");
 
 var services = builder.Services;
 services.AddScoped<Address>();
@@ -36,6 +35,8 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
+    //builder.WebHost.UseUrls("http://*:4002");
+
 }
 
 

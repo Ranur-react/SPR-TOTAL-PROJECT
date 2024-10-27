@@ -1,3 +1,23 @@
-﻿<div class="row">
+﻿@section HeaderTag{
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+}
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddMaterial">Tambah Proyek</button
+    </div>
+</div>
+<div class="row">
     @Html.Partial("ListProyek")
 </div>
+@Html.Partial("Form/ModalAdd")
+@Html.Partial("Form/ModalUpdate")
+
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="~/js/_Helper.js"></script>
+    <script src="~/js/Proyek/ProyekDataTable.js"></script>
+    <script src="~/js/Proyek/CrudFunctions.js"></script>
+    }

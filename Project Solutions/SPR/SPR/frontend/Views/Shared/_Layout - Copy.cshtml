@@ -1,38 +1,37 @@
 ﻿@using frontend.Base;
 @inject Microsoft.Extensions.Options.IOptions<AppSettings> AppSettingsConfig
 
-@{
-    var currentController = ViewContext.RouteData.Values["controller"] as string;
-    var currentAction = ViewContext.RouteData.Values["action"] as string;
-    string ActiveClass(string controllers = null, string actions = null, string cssClass = "text-dark")
-    {
-
-        controllers = controllers.ToLower();
-        actions = actions.ToLower();
-
-        currentAction = currentAction.ToLower();
-        currentController = currentController.ToLower();
-
-        var acceptedControllers = (controllers ?? currentController ?? "").Split(',');
-        var acceptedActions = (actions ?? currentAction ?? "").Split(',');
-
-        if (acceptedControllers.Contains(currentController))
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"] as string;
+        var currentAction = ViewContext.RouteData.Values["action"] as string;
+        string ActiveClass(string controllers = null, string actions = null, string cssClass = "active")
         {
-            return currentAction == actions ? cssClass : "text-muted";
-        }
-        else
-        {
-            return "text-muted";
-        }
+       
+            controllers = controllers.ToLower();
+            actions = actions.ToLower();
+
+            currentAction = currentAction.ToLower();
+            currentController = currentController.ToLower();
+
+            var acceptedControllers = (controllers ?? currentController ?? "").Split(',');
+            var acceptedActions = (actions ?? currentAction ?? "").Split(',');
+
+            if (acceptedControllers.Contains(currentController))
+            {
+                return currentAction == actions ? cssClass : "collapse";
+            }
+            else
+            {
+                return "collapse";
+            }
 
 
 
-        @*  return acceptedControllers.Contains(currentController) && acceptedActions.Contains(currentAction)
+            @*  return acceptedControllers.Contains(currentController) && acceptedActions.Contains(currentAction)
                 ? cssClass
                 : "";*@
+        }
     }
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,18 +56,23 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link   @ActiveClass("SPR", "Index")" asp-area="" asp-controller="SPR" asp-action="Index">SPR</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link @ActiveClass("Proyek", "Index")" asp-area="" asp-controller="Proyek" asp-action="Index">Proyek</a>
+                        <li class="nav-item active">
+                            <a class="nav-link @ActiveClass("SPR", "Index")"  asp-area="" asp-controller="SPR" asp-action="Index">SPR</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @ActiveClass("Material", "Index")" asp-area="" asp-controller="Material" asp-action="Index">Material</a>
+                            <a class="nav-link text-dark " asp-area="" asp-controller="Approval" asp-action="Index">Persetujuan SPR</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link @ActiveClass("SPR", "Index")" " asp-area="" asp-controller="Proyek" asp-action="Index">Proyek</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" asp-area="" asp-controller="ApprovalSPR" asp-action="Index">Persetujuan</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Material" asp-action="Index">Material</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Material" asp-action="Index">Material</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -86,7 +90,8 @@
             &copy; 2024 - frontend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
