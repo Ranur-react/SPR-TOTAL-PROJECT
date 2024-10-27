@@ -6,7 +6,7 @@ pipeline {
         imageName = "ranur/api1-spr:6.0"
         BRANCH = "release4.0"
         NODE="dotnet1"
-        PORT="4001"
+        PORT="80"
         PORT_PULISH="4001"
         ROOTDIR="SPR-TOTAL-PROJECT"
         SUBDIRECTORY = "3. API1-SPR Service"

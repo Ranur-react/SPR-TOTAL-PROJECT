@@ -74,7 +74,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.Urls.Add("http://*:4001"); // Ensure the application listens on the correct port
+    //app.Urls.Add("http://*:4001"); // Ensure the application listens on the correct port
     // Ensure Swagger is available in production
     app.UseSwagger();
     app.UseSwaggerUI(c =>
