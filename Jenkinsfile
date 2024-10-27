@@ -5,11 +5,11 @@ pipeline {
         DOCKERHUB_USER = 'ranur'
         imageName = "ranur/netcore:6.0-spr"
         BRANCH = "release5.0"
-        NODE="dotnet1"
-        PORT="4001"
-        PORT_PULISH="4001"
+        NODE="dotnet2"
+        PORT="4002"
+        PORT_PULISH="4002"
         ROOTDIR="SPR-TOTAL-PROJECT"
-        SUBDIRECTORY = "3. API1-SPR Service"
+        SUBDIRECTORY = "1. Front Eend - ASPNETCore"
         GITPATHREPO = "github.com/Ranur-react/SPR-TOTAL-PROJECT.git" 
     }
     
