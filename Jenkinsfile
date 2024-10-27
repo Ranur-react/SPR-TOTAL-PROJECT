@@ -9,7 +9,7 @@ pipeline {
         PORT="4002"
         PORT_PULISH="4002"
         ROOTDIR="SPR-TOTAL-PROJECT"
-        SUBDIRECTORY = "1. Front Eend - ASPNETCore"
+        SUBDIRECTORY = "FrontEnd"
         GITPATHREPO = "github.com/Ranur-react/SPR-TOTAL-PROJECT.git" 
     }
     
