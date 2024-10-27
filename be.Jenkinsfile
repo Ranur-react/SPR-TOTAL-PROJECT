@@ -3,8 +3,8 @@ pipeline {
     environment {
         // Set environment variables for Docker Hub credentials
         DOCKERHUB_USER = 'ranur'
-        imageName = "ranur/api1-spr:6.0"
-        BRANCH = "release4.0"
+        imageName = "ranur/netcore:6.0-spr"
+        BRANCH = "release6.0"
         NODE="dotnet1"
         PORT="4001"
         PORT_PULISH="4001"

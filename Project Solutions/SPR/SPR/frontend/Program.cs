@@ -35,10 +35,7 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    builder.WebHost.UseUrls("http://*:4002");
     builder.WebHost.UseUrls("https://*:4002");
-    app.Urls.Add("http://*:4002");
-    app.Urls.Add("https://*:4002");
 }
 
 
